@@ -34,7 +34,7 @@ for perLine in readSourceFile:
         analystsTarget = driver.find_elements(By.XPATH, '//div[text()="Analysts"]/../../following-sibling::div[1]//div[2]')
         value = analystsTarget[2].text
 
-        if len(perLine) < 15:
+        if len(perLine) < 12:
             tabCharacter = "\t\t\t"
         else:
             tabCharacter = "\t\t"
@@ -49,7 +49,7 @@ for perLine in readSourceFile:
         analystsTarget = driver.find_elements(By.XPATH, '//div[text()="Technical"]/../following-sibling::div[1]//div[2]')
         value = analystsTarget[2].text
 
-        if len(perLine) < 15:
+        if len(perLine) < 12:
             tabCharacter = "\t\t\t"
         else:
             tabCharacter = "\t\t"
