@@ -1,14 +1,17 @@
+import os.path
 import time
-from datetime import datetime
 
+from datetime import datetime
 from selenium import webdriver
-# from selenium.common import NoSuchElementException
+from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+
+from page import ClassGoogle
 
 cService = webdriver.ChromeService(executable_path='./chromedriver.exe')
 driver = webdriver.Chrome(service=cService)
@@ -302,7 +305,6 @@ def HandleDatePickers():
     driver.execute_script("arguments[0].scrollIntoView()", colorslabel)
 
     # direct type date
-    
     datepicker = driver.find_element(By.XPATH, "//input[@id='datepicker']")
     datepicker.click()
     datepicker.send_keys('12/12/2023')
@@ -334,9 +336,243 @@ def HandleDatePickers():
     time.sleep(2)
 
 
-def ExecutionEnd():
+def HandleMouseActions():
+    url = "https://demo.opencart.com/"
+    driver.get(url)
+
+    # -----How to handle Mouse Hover-----
+    desktopslabel = driver.find_element(By.XPATH, "//a[text()='Desktops']")
+    maclabel = driver.find_element(By.XPATH, "//a[text()='Mac (1)']")
+
+    action = ActionChains(driver)
+    action.move_to_element(desktopslabel).perform()
+    action.move_to_element(maclabel).perform()
+
+    time.sleep(2)
+
+    # -----How to handle Mouse Right Click-----
+    driver.get('https://swisnl.github.io/jQuery-contextMenu/demo.html')
+
+    buttonrightclick = driver.find_element(By.XPATH, "//span[@class='context-menu-one btn btn-neutral']")
+    action.context_click(buttonrightclick).perform()
+    time.sleep(1)
+
+    pastecontext = driver.find_element(By.XPATH, "//span[text()='Paste']")
+    action.move_to_element(pastecontext).perform()
+
+    time.sleep(2)
+
+    # -----How to handle Mouse Double Click-----
+    driver.get('https://testautomationpractice.blogspot.com/')
+
+    buttondoubleclick = driver.find_element(By.XPATH, "//button[text()='Copy Text']")
+    action.double_click(buttondoubleclick).perform()
+
+    field1 = driver.find_element(By.XPATH, "//input[@id='field1']").get_attribute("value")
+    print("Text is: ", field1)
+
+    field2 = driver.find_element(By.XPATH, "//input[@id='field2']").get_attribute("value")
+    print("Text is: ", field2)
+
+    # -----How to handle Mouse Drag and Drop-----
+    draggable = driver.find_element(By.XPATH, "//div[@id='draggable']")
+    droppable = driver.find_element(By.XPATH, "//div[@id='droppable']")
+
+    action.drag_and_drop(draggable, droppable).perform()
+
+
+def HandleKeyboardActions():
+    url = "https://gotranscript.com/text-compare/"
+    driver.get(url)
+
+    fromtextarea = driver.find_element(By.XPATH, "//textarea[@name='text1']")
+    totextarea = driver.find_element(By.XPATH, "//textarea[@name='text2']")
+    buttoncompare = driver.find_element(By.XPATH, "//button[@id='recaptcha']")
+
+    fromtextarea.send_keys("Hello World was here")
+    fromtextarea.click()
+
+    action = ActionChains(driver)
+    action.key_down(Keys.CONTROL)\
+        .send_keys('a')\
+        .send_keys('c')\
+        .perform()
+
+    totextarea.click()
+    action.key_down(Keys.CONTROL)\
+        .send_keys('v')\
+        .perform()
+
+    buttoncompare.click()
+
+    time.sleep(2)
+
+
+def HandleUploadFiles():
+    url = "https://www.foundit.in/"
+    driver.get(url)
+
+    try:
+        time.sleep(2)
+        wait = WebDriverWait(driver, 10)
+        wait.until(ec.presence_of_element_located((By.XPATH, "//i[@class='mqfihd-upload']")))
+
+    except TimeoutException as ex:
+        print("-- [TIMEOUT] --")
+        print(ex)
+
+    url = "https://davidwalsh.name/demo/multiple-file-upload.php"
+    driver.get(url)
+
+    nofileslabel = driver.find_element(By.XPATH, "//ul[@id='fileList']/li")
+    print("\"No Files Selcted = \"", nofileslabel.text)
+
+    filestouploadbutton = driver.find_element(By.XPATH, "//input[@id='filesToUpload']")
+    filestouploadbutton.send_keys("C:/Temp/sample1.txt \n C:/Temp/sample2.txt")
+
+    filename1 = driver.find_element(By.XPATH, "//ul[@id='fileList']/li[1]")
+    filename2 = driver.find_element(By.XPATH, "//ul[@id='fileList']/li[2]")
+
+    print("\"sample1.txt\"= ", filename1.text)
+    print("\"sample2.txt\"= ", filename2.text)
+
+
+def HandlePagesWindows():
+    url = "https://opensource-demo.orangehrmlive.com/"
+    driver.get(url)
+
+    originalwindow = driver.current_window_handle
+    print(driver.title)
+
+    driver.switch_to.new_window('tab')
+    driver.get("https://www.orangehrm.com/")
+    tabwindow = driver.current_window_handle
+    print(driver.title)
+
+    driver.switch_to.new_window('window')
+    driver.get("https://www.google.com/")
+    newwindow = driver.current_window_handle
+    print(driver.title)
+    time.sleep(2)
+    driver.close()
+
+    print("Original Window: ", originalwindow)
+    print("Tab Window: ", tabwindow)
+    print("New Window: ", newwindow)
+
+    totalwindows = driver.window_handles
+    print("Number of Window(s): ", len(totalwindows))
+
+    driver.switch_to.window(tabwindow)
+    time.sleep(1)
+    driver.close()
+
+    driver.switch_to.window(originalwindow)
+    time.sleep(2)
+
+
+def HandleMultiplePagesWindows():
+    url = "https://opensource-demo.orangehrmlive.com/"
+    driver.get(url)
+
+    # Original Window
+    driver.get('https://opensource-demo.orangehrmlive.com/')
+    originalwindow = driver.current_window_handle
+    print(driver.title)
+
+    wait = WebDriverWait(driver, 10)
+    wait.until(ec.presence_of_element_located((By.XPATH, "//a[text()='OrangeHRM, Inc']")))
+
+    orangelink = driver.find_element(By.XPATH, "//a[text()='OrangeHRM, Inc']")
+    orangelink.click()
+
+    # New Tab
+    openwindows = driver.window_handles
+    driver.switch_to.window(openwindows[1])
+
+    tabwindow = driver.current_window_handle
+    print(driver.title)
+
+    # New Window
+    driver.switch_to.new_window('window')
+    driver.get("https://www.google.com")
+    newwindow = driver.current_window_handle
+    print(driver.title)
+    time.sleep(2)
+
+    print("Original Window: ", originalwindow)
+    print("Tab Window: ", tabwindow)
+    print("New Window: ", newwindow)
+
+    totalwindows = driver.window_handles
+    print("Number of Window(s): ", len(totalwindows))
+
+    driver.switch_to.window(originalwindow)
+    usernameinput = driver.find_element(By.XPATH, "//input[@name='username']")
+    usernameinput.send_keys("username123")
+    time.sleep(3)
+
+    driver.switch_to.window(tabwindow)
+    usernameinput = driver.find_element(By.XPATH, "//input[@id='Form_submitForm_EmailHomePage']")
+    usernameinput.send_keys("username123@gmail.com")
+    time.sleep(3)
+
+    driver.switch_to.window(newwindow)
+    usernameinput = driver.find_element(By.XPATH, "//textarea[@name='q']")
+    usernameinput.send_keys("python 3")
     time.sleep(3)
     driver.close()
+
+    driver.switch_to.window(originalwindow)
+
+
+def HandleCaptureScreen():
+    url = "https://testautomationpractice.blogspot.com/"
+    driver.get(url)
+
+    now = datetime.now()
+    dt_string = now.strftime("%m%d%Y_%I%M%S")
+
+    if not os.path.exists("./captures"):
+        os.makedirs("./captures")
+        print("Directory created")
+    else:
+        print("Directory already exists")
+
+    savefile = "./captures/window_" + dt_string + ".png"
+    print(savefile)
+    driver.save_screenshot(savefile)
+
+    savefile = "./captures/element_" + dt_string + ".png"
+    droppablelement = driver.find_element(By.XPATH, "//div[@id='droppable']")
+    droppablelement.screenshot(savefile)
+
+
+class MyClasss:
+    def __init__(self):
+        self.x = 55
+
+    @staticmethod
+    def loopprint():
+        for i in range(5):
+            print(i)
+
+
+def HandleUsingClass():
+    # class within same file
+    myclassinstance = MyClasss()
+    print(myclassinstance.x)
+    myclassinstance.loopprint()
+
+    # class from external file
+    classgoogleinstance = ClassGoogle(driver)
+    classgoogleinstance.openPage("https://www.google.com")
+    classgoogleinstance.enterSearchInput("python 3")
+    time.sleep(2)
+
+
+def ExecutionEnd():
+    time.sleep(3)
     driver.quit()
 
     now = datetime.now()
@@ -345,16 +581,23 @@ def ExecutionEnd():
 
 
 def StartTest():
-    # HandleInputandRadio()
-    # HandleDropdown()
-    # HandleMultiDropdown()
-    # HandleBootstrapDropdown()
-    # HandleAutoSuggestion()
-    # HandleHiddenItems()
-    # HandleDialogAlerts()
-    # HandleFramesiFrames()
-    # HandleWebTablePagination()
+    HandleInputandRadio()
+    HandleDropdown()
+    HandleMultiDropdown()
+    HandleBootstrapDropdown()
+    HandleAutoSuggestion()
+    HandleHiddenItems()
+    HandleDialogAlerts()
+    HandleFramesiFrames()
+    HandleWebTablePagination()
     HandleDatePickers()
+    HandleMouseActions()
+    HandleKeyboardActions()
+    HandleUploadFiles()
+    HandlePagesWindows()
+    HandleMultiplePagesWindows()
+    HandleCaptureScreen()
+    HandleUsingClass()
     ExecutionEnd()
 
 
