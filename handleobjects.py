@@ -10,11 +10,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+from selenium.webdriver.chrome.options import Options
 
 from page import ClassGoogle
 
 cService = webdriver.ChromeService(executable_path='./chromedriver.exe')
-driver = webdriver.Chrome(service=cService)
+# driver = webdriver.Chrome(service=cService)
+
+chrome_options = Options()
+chrome_options.add_argument("--ignore-certificate-errors")
+chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
+driver = webdriver.Chrome(service=cService, options=chrome_options)
 
 
 def HandleInputandRadio():
@@ -516,6 +522,8 @@ def HandleMultiplePagesWindows():
     usernameinput = driver.find_element(By.XPATH, "//input[@id='Form_submitForm_EmailHomePage']")
     usernameinput.send_keys("username123@gmail.com")
     time.sleep(3)
+    driver.close()
+    time.sleep(3)
 
     driver.switch_to.window(newwindow)
     usernameinput = driver.find_element(By.XPATH, "//textarea[@name='q']")
@@ -601,4 +609,4 @@ def StartTest():
     ExecutionEnd()
 
 
-StartTest()
+# StartTest()
