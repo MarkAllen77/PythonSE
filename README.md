@@ -37,7 +37,15 @@
     <td>used as an export file for the POM pattern</td>
   </tr>
   <tr>
-    <td>single.test.py</td>
-    <td>??</td>
-  </tr>  
+    <td>test_demo.py</td>
+    <td>sandbox file for trying pytest functions</td>
+  </tr> 
+  <tr>
+    <td>test_handleobjects.py</td>
+    <td>applying pytest with completed functions from selenium</td>
+  </tr>    
+  <tr>
+    <td>functions.py and test_functions.py</td>
+    <td>pytest tutorial from https://www.youtube.com/watch?v=cHYq1MRoyI0</td>
+  </tr>      
 </table>
