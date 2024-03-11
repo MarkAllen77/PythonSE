@@ -44,4 +44,8 @@
     <td>test_handleobjects.py</td>
     <td>applying pytest with completed functions from selenium</td>
   </tr>    
+  <tr>
+    <td>functions.py and test_functions.py</td>
+    <td>pytest tutorial from https://www.youtube.com/watch?v=cHYq1MRoyI0</td>
+  </tr>      
 </table>
