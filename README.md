@@ -47,5 +47,9 @@
   <tr>
     <td>functions.py and test_functions.py</td>
     <td>pytest tutorial from https://www.youtube.com/watch?v=cHYq1MRoyI0</td>
-  </tr>      
+  </tr>
+  <tr>
+    <td>market.py</td>
+    <td>used to compare playwright and selenium speed</td>
+  </tr>    
 </table>
