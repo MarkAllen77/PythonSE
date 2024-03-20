@@ -1,7 +1,7 @@
 # Selenium Webdriver using Python 3
 **PROGRAMMING LANGUAGE:** *Python on Pycharm*<br />
 
-**INTRO:** *Python code using Selenum in handling different objects in a web application. Sample functions were translated from the Playwright code.*<br /> 
+**INTRO:** *Python code using Selenium in handling different objects in a web application. Sample functions were translated from the Playwright code.*<br /> 
 
 **FUNCTIONS:**<br />
   &nbsp;&nbsp;&nbsp; HandleInputandRadio<br />
