@@ -1,7 +1,10 @@
 import os.path
+import subprocess
 import time
 
 from datetime import datetime
+import subprocess
+
 from selenium import webdriver
 from selenium.common import TimeoutException
 from selenium.webdriver import ActionChains, Keys
@@ -579,6 +582,23 @@ def HandleUsingClass():
     time.sleep(2)
 
 
+def recorder():
+    # cmd = "ffmpeg -y -rtbufsize 2000M -f dshow -i video='screen-capture-recorder' -r 10 -t 20 screen-capture.mp4"
+    cmd = '["python", "--help"]'
+    proc = subprocess.Popen(cmd)
+    return proc
+
+
+def HandlingVideoCapture():
+    proc = recorder()
+    recorder()
+
+    url = "https://www.google.com/"
+    driver.get(url)
+
+    proc.kill()
+
+
 def ExecutionEnd():
     time.sleep(3)
     driver.quit()
@@ -606,7 +626,8 @@ def StartTest():
     HandleMultiplePagesWindows()
     HandleCaptureScreen()
     HandleUsingClass()
+    # HandlingVideoCapture()
     ExecutionEnd()
 
 
-# StartTest()
+StartTest()

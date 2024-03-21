@@ -57,3 +57,5 @@ class TestCases:
 
     def test_executionend(self):
         handleobjectsinstance.ExecutionEnd()
+
+# to execute > terminal > pytest .\tests\test_handleobjects.py --html=.\reports\report1.html

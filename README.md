@@ -3,6 +3,9 @@
 
 **INTRO:** *Python code using Selenum in handling different objects in a web application. Sample functions were translated from the Playwright code.*<br /> 
 
+**FRAMEWORK:**<br />
+  &nbsp;&nbsp;&nbsp; Pytest<br />
+
 **FUNCTIONS:**<br />
   &nbsp;&nbsp;&nbsp; HandleInputandRadio<br />
   &nbsp;&nbsp;&nbsp; HandleDropdown<br />
