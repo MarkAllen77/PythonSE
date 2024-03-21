@@ -1,7 +1,7 @@
 # Selenium Webdriver using Python 3
 **PROGRAMMING LANGUAGE:** *Python on Pycharm*<br />
 
-**INTRO:** *Python code using Selenum in handling different objects in a web application. Sample functions were translated from the Playwright code.*<br /> 
+**INTRO:** *Python code using Selenium in handling different objects in a web application. Sample functions were translated from the Playwright code.*<br /> 
 
 **FRAMEWORK:**<br />
   &nbsp;&nbsp;&nbsp; Pytest<br />
@@ -50,5 +50,9 @@
   <tr>
     <td>functions.py and test_functions.py</td>
     <td>pytest tutorial from https://www.youtube.com/watch?v=cHYq1MRoyI0</td>
-  </tr>      
+  </tr>
+  <tr>
+    <td>market.py</td>
+    <td>used to compare playwright and selenium speed</td>
+  </tr>    
 </table>
