@@ -643,7 +643,6 @@ def CoreFunctions():
     PythonSEInstance.HandleMultiplePagesWindows()
     PythonSEInstance.HandleCaptureScreen()
     PythonSEInstance.HandleUsingClass()
-    # PythonSE.HandleVideoCapture()
     PythonSEInstance.ExecutionEnd()
 
 
