@@ -1,61 +1,61 @@
-import handleobjects
+from handleobjects import PythonSE
 
-handleobjectsinstance = handleobjects
+PythonSEInstance = PythonSE()
 
 
 class TestCases:
     def test_handleinputandradio(self):
-        handleobjectsinstance.HandleInputandRadio()
+        PythonSEInstance.HandleInputandRadio()
 
     def test_handledropdown(self):
-        handleobjectsinstance.HandleDropdown()
+        PythonSEInstance.HandleDropdown()
 
     def test_handlemultidropdown(self):
-        handleobjectsinstance.HandleMultiDropdown()
+        PythonSEInstance.HandleMultiDropdown()
 
     def test_handlebootstrapdropdown(self):
-        handleobjectsinstance.HandleBootstrapDropdown()
+        PythonSEInstance.HandleBootstrapDropdown()
 
     def test_handleautosuggestion(self):
-        handleobjectsinstance.HandleAutoSuggestion()
+        PythonSEInstance.HandleAutoSuggestion()
 
     def test_handlehiddenitems(self):
-        handleobjectsinstance.HandleHiddenItems()
+        PythonSEInstance.HandleHiddenItems()
 
     def test_handledialogalerts(self):
-        handleobjectsinstance.HandleDialogAlerts()
+        PythonSEInstance.HandleDialogAlerts()
 
     def test_handleframesiframes(self):
-        handleobjectsinstance.HandleFramesiFrames()
+        PythonSEInstance.HandleFramesiFrames()
 
     def test_handlewebtablepagination(self):
-        handleobjectsinstance.HandleWebTablePagination()
+        PythonSEInstance.HandleWebTablePagination()
 
     def test_handledatepickers(self):
-        handleobjectsinstance.HandleDatePickers()
+        PythonSEInstance.HandleDatePickers()
 
     def test_handlemouseactions(self):
-        handleobjectsinstance.HandleMouseActions()
+        PythonSEInstance.HandleMouseActions()
 
     def test_handlekeyboardactions(self):
-        handleobjectsinstance.HandleKeyboardActions()
+        PythonSEInstance.HandleKeyboardActions()
 
     def test_handleuploadfiles(self):
-        handleobjectsinstance.HandleUploadFiles()
+        PythonSEInstance.HandleUploadFiles()
 
     def test_handlepageswindows(self):
-        handleobjectsinstance.HandlePagesWindows()
+        PythonSEInstance.HandlePagesWindows()
 
     def test_handlemultiplepageswindows(self):
-        handleobjectsinstance.HandleMultiplePagesWindows()
+        PythonSEInstance.HandleMultiplePagesWindows()
 
     def test_handlecapturescreen(self):
-        handleobjectsinstance.HandleCaptureScreen()
+        PythonSEInstance.HandleCaptureScreen()
 
     def test_handleusingclass(self):
-        handleobjectsinstance.HandleUsingClass()
+        PythonSEInstance.HandleUsingClass()
 
     def test_executionend(self):
-        handleobjectsinstance.ExecutionEnd()
+        PythonSEInstance.ExecutionEnd()
 
 # to execute > terminal > pytest .\tests\test_handleobjects.py --html=.\reports\report1.html
