@@ -1,9 +1,9 @@
 import os.path
 import time
 
-import cv2 as cv
 import pyautogui
-import numpy as np
+import cv2 as open_cv
+import numpy as numpy_array
 
 import threading
 
@@ -589,26 +589,27 @@ class PythonSE:
 
         now = datetime.now()
         dt_string = now.strftime("%m/%d/%Y %I:%M:%S")
-        print("[End Execution  ]", dt_string)
+        print("[End SE Execution]", dt_string)
 
 
 def Recorder():
     # (width,height)
     screen_size = pyautogui.size()
+    print("Recorder screen size: ", screen_size)
 
     # initialize the object
-    video = cv.VideoWriter('./recording/VideoSE.avi', cv.VideoWriter.fourcc(*'MJPG'), 20, screen_size)
+    video = open_cv.VideoWriter('./recording/VideoSE.avi', open_cv.VideoWriter.fourcc(*'MJPG'), 20, screen_size)
 
-    print("Recording.....")
+    print("[Start Recorder]")
     while recorderstatus:
-        # click screenshot
+        # capture current screen
         screen_shot_img = pyautogui.screenshot()
 
         # convert into array
-        frame = np.array(screen_shot_img)
+        frame = numpy_array.array(screen_shot_img)
 
         # change from BGR to RGB
-        frame = cv.cvtColor(frame, cv.COLOR_BGR2RGB)
+        frame = open_cv.cvtColor(frame, open_cv.COLOR_BGR2RGB)
 
         # write frame
         video.write(frame)
@@ -618,7 +619,7 @@ def Recorder():
         # if cv.waitKey(1) == ord("q"):
         #     break
 
-    cv.destroyAllWindows()
+    open_cv.destroyAllWindows()
     video.release()
 
 
@@ -653,10 +654,12 @@ thread2 = threading.Thread(target=CoreFunctions)
 
 def StartTest():
     thread1.start()
+    time.sleep(3)
     thread2.start()
 
     thread2.join()
 
+    print("[Stop Recorder]")
     global recorderstatus
     recorderstatus = False
 
